@@ -1,10 +1,11 @@
-import React, { useContext, useEffect } from 'react'; // Added useEffect import
+import React, { useContext, useEffect } from 'react'; 
 import { useNavigate } from 'react-router-dom'; 
 import { assets } from '../assets/assets';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AppContent } from '../context/AppContext';
+import AnimatedBackgroundBubbles from '../components/AnimatedBackgroundBubbles'; // Import the bubbles background component
 
 const EmailVerify = () => {
   const navigate = useNavigate();
@@ -62,39 +63,42 @@ const EmailVerify = () => {
   }, [isLoggedin, userData, navigate]);
 
   return (
-    <div className='relative flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-200 to-purple-400'>
-      <img
-        onClick={() => navigate('/')}
-        src={assets.logo}
-        alt='Logo'
-        className='absolute left-5 sm:left-20 top-5 w-28 sm:w-32 cursor-pointer'
-      />
-      <form
-        onSubmit={onSubmitHandler}
-        className='bg-slate-900 p-8 rounded-lg shadow-lg w-96 text-sm'>
-        <h1 className='text-white text-2xl font-semibold text-center mb-4'>Email Verify OTP</h1>
-        <p className='text-indigo-300 text-center mb-6'>Enter the 6-digit code sent to your email id.</p>
-        <div className='flex justify-between mb-8' onPaste={handlePaste}>
-          {Array(6).fill(0).map((_, index) => (
-            <input
-              type="text"
-              maxLength='1'
-              key={index}
-              required
-              className='w-12 h-12 bg-[#333A5C] text-white text-center text-xl rounded-md'
-              ref={e => inputRefs.current[index] = e}
-              onChange={(e) => handleInput(e, index)}
-              onKeyDown={(e) => handleKeyDown(e, index)}
-            />
-          ))}
-        </div>
-        <button
-          type="submit"
-          className='w-full py-2 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white font-semibold rounded-full'>
-          Verify Email
-        </button>
-      </form>
-    </div>
+    <AnimatedBackgroundBubbles> {/* Wrap the entire page in the AnimatedBackgroundBubbles component */}
+      <div className='relative flex items-center justify-center min-h-screen'>
+        <img
+          onClick={() => navigate('/')}
+          src={assets.logo}
+          alt='Logo'
+          className='absolute left-5 sm:left-20 top-5 w-28 sm:w-32 cursor-pointer'
+        />
+        <form
+          onSubmit={onSubmitHandler}
+          className='bg-white p-10 rounded-xl shadow-2xl w-[400px] text-sm transform transition-all duration-300 ease-in-out'>
+          <h1 className='text-black text-2xl font-semibold text-center mb-4'>Email Verify OTP</h1>
+          <p className='text-indigo-300 text-center mb-6'>Enter the 6-digit code sent to your email id.</p>
+          <div className='flex justify-between mb-8' onPaste={handlePaste}>
+            {Array(6).fill(0).map((_, index) => (
+              <input
+                type="text"
+                maxLength='1'
+                key={index}
+                required
+                className='w-12 h-12 bg-[#dadada] text-black text-center text-xl rounded-md focus:ring-2 focus:ring-indigo-500 transition-all duration-200'
+                ref={e => inputRefs.current[index] = e}
+                onChange={(e) => handleInput(e, index)}
+                onKeyDown={(e) => handleKeyDown(e, index)}
+              />
+            ))}
+          </div>
+          <button
+            type="submit"
+            className='w-full py-3 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white font-semibold rounded-lg active:scale-95 transition-all duration-150 ease-in-out'>
+            Verify Email
+          </button>
+        </form>
+      </div>
+      <ToastContainer />
+    </AnimatedBackgroundBubbles>
   );
 };
 

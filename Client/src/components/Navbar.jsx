@@ -45,10 +45,9 @@ const Navbar = () => {
       toast.error(error?.response?.data?.message || 'An error occurred');
     }
   }
-  
 
   return (
-    <nav className="w-full fixed top-0 left-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+    <nav className="w-full fixed top-0 left-0 z-50 bg-transparent backdrop-blur-md">
       <div className="max-w-7xl mx-auto flex justify-between items-center p-4 sm:p-6 sm:px-8 lg:px-12">
         <div className="flex items-center">
           <img
@@ -94,7 +93,7 @@ const Navbar = () => {
         ) : (
           <button
             onClick={() => navigate('/login')}
-            className="flex items-center gap-2 bg-white px-6 py-2.5 rounded-full text-gray-800 font-medium transition-all duration-300 ease-in-out hover:shadow-md hover:bg-gray-50 border border-gray-200 hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="flex items-center gap-2 bg-blue-500 text-white px-6 py-3 rounded-full font-medium transition-all duration-300 ease-in-out hover:shadow-xl hover:bg-blue-600 border border-blue-600 hover:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             <span>Login</span>
             <ArrowRight
@@ -102,6 +101,7 @@ const Navbar = () => {
               strokeWidth={2}
             />
           </button>
+
         )}
       </div>
       <ToastContainer position="top-right" autoClose={3000} />
